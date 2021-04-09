@@ -24,6 +24,7 @@ def skoba(old_list: list, in_list: list, corect_list: list):
 
     return
 
+
 # Признак fuck = 1 для остановки цикла
 __FUCK = 0
 __CORECTOR_LIST_SKOBKI = [0]
@@ -35,12 +36,10 @@ while __FUCK == 0:
         __FUCK = 1
         break
 
-    filter_for_primer = lambda n: [] if n == "(" else n
+    # filter_for_primer = lambda n: [] if n == "(" else n
     # Создание списка из строки primer с фильтром от пробелов
     list_primer = [el for el in primer if el != " "]
 
-    print(list_primer)
     new_m = []
-
     skoba(list_primer, new_m, __CORECTOR_LIST_SKOBKI)
-    print("\n\n\n",new_m)
+    print("\n\n\n", new_m)
