@@ -36,6 +36,7 @@ while __FUCK == 0:
     # Пример после скобок
     new_primer = []
     scobki.fun_brackets_in_list(list_primer, new_primer)
+
     # Список для формирования чисел из примера
     list_digit = []
 
@@ -44,6 +45,7 @@ while __FUCK == 0:
 
     # Коректор индекса для звписи в элемент списка list_digit
     i_for_filter = 0
+
 
     # Скелеивание единых чисел в элемент списока list_digit и
     # добавление арифмитического оператора в список list_operator
@@ -107,7 +109,7 @@ while __FUCK == 0:
     # Выполнение приоритетных арифмитических операций: * / // %
     for i in range(len(pow_list_operator)):
         # print(pow_list_digit, pow_list_operator)
-        # Обработка приоритетных операторов: * / // % ** ^
+        # Обработка приоритетных операторов: * / // %
         if pow_list_operator[i] == "*" or pow_list_operator[i] == "/" \
                 or pow_list_operator[i] == "//" or pow_list_operator[i] == "%":
             # Присвоение класса для обработки операции
