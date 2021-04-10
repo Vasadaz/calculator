@@ -1,5 +1,5 @@
 # Функция может обращаться к себеже
-def skoba(old_list: list, in_list: list, corect_list: list):
+def skoba(old_list: list, new_list: list, corect_list: list):
     copy_old_list = old_list.copy()
     corect_in_list = 0
     for el in old_list:
@@ -12,15 +12,15 @@ def skoba(old_list: list, in_list: list, corect_list: list):
 
         if el == "(":
             copy_old_list.pop(0)
-            in_list.append([])
-            skoba(copy_old_list, in_list[-1], corect_list)
+            new_list.append([])
+            skoba(copy_old_list, new_list[-1], corect_list)
         elif el == ")":
             copy_old_list.pop(0)
             corect_list.append(corect_in_list)
             return
         else:
             copy_old_list.pop(0)
-            in_list.append(el)
+            new_list.append(el)
 
     return
 
