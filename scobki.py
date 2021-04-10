@@ -1,27 +1,27 @@
-# Функция может обращаться к себеже
-def skoba(old_list: list, new_list: list, corect_list: list):
+# Функция для обработки скобок
+def skoba(old_list: list, new_list: list):
+    global  __CORECTOR_LIST_SKOBKI
     copy_old_list = old_list.copy()
     corect_in_list = 0
     for el in old_list:
         corect_in_list += 1
-        if corect_list[-1] != 0:
-            corect_list[-1] -= 1
+        if __CORECTOR_LIST_SKOBKI[-1] != 0:
+            __CORECTOR_LIST_SKOBKI[-1] -= 1
             continue
-        elif len(corect_list) != 1:
-            del corect_list[-1]
+        elif len(__CORECTOR_LIST_SKOBKI) != 1:
+            del __CORECTOR_LIST_SKOBKI[-1]
 
         if el == "(":
             copy_old_list.pop(0)
             new_list.append([])
-            skoba(copy_old_list, new_list[-1], corect_list)
+            skoba(copy_old_list, new_list[-1])
         elif el == ")":
             copy_old_list.pop(0)
-            corect_list.append(corect_in_list)
+            __CORECTOR_LIST_SKOBKI.append(corect_in_list)
             return
         else:
             copy_old_list.pop(0)
             new_list.append(el)
-
     return
 
 # Признак fuck = 1 для остановки цикла
@@ -35,12 +35,11 @@ while __FUCK == 0:
         __FUCK = 1
         break
 
-    filter_for_primer = lambda n: [] if n == "(" else n
+    # filter_for_primer = lambda n: [] if n == "(" else n
     # Создание списка из строки primer с фильтром от пробелов
     list_primer = [el for el in primer if el != " "]
 
-    print(list_primer)
-    new_m = []
+    new_primer = []
 
-    skoba(list_primer, new_m, __CORECTOR_LIST_SKOBKI)
-    print("\n\n\n",new_m)
+    skoba(list_primer, new_primer)
+    print(new_primer)
