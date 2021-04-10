@@ -1,3 +1,6 @@
+import scobki
+
+
 class ArifmeticOperation:
     # Метод определения арифмитической операции
     def operation(self, a: float, operator: str, b: float):
@@ -18,17 +21,21 @@ class ArifmeticOperation:
 
 
 # Признак fuck = 1 для остановки цикла
-fuck = 0
+__FUCK = 0
+#__CORECTOR_LIST_SKOBKI = [0]
 
-while fuck == 0:
+while __FUCK == 0:
     # Ввод примера
     primer = input("Чё там?\n")
-    if primer == "n":
-        fuck = 1
+    if primer == "":
+        __FUCK = 1
         break
     # Создание списка из строки primer с фильтром от пробелов
     list_primer = [el for el in primer if el != " "]
 
+    # Пример после скобок
+    new_primer = []
+    scobki.fun_brackets_in_list(list_primer, new_primer)
     # Список для формирования чисел из примера
     list_digit = []
 

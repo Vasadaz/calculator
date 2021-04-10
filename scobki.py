@@ -1,6 +1,6 @@
 # Функция для обработки скобок
-def skoba(old_list: list, new_list: list):
-    global  __CORECTOR_LIST_SKOBKI
+def fun_brackets_in_list(old_list: list, new_list: list):
+    global __CORECTOR_LIST_SKOBKI
     copy_old_list = old_list.copy()
     corect_in_list = 0
     for el in old_list:
@@ -14,7 +14,7 @@ def skoba(old_list: list, new_list: list):
         if el == "(":
             copy_old_list.pop(0)
             new_list.append([])
-            skoba(copy_old_list, new_list[-1])
+            fun_brackets_in_list(copy_old_list, new_list[-1])
         elif el == ")":
             copy_old_list.pop(0)
             __CORECTOR_LIST_SKOBKI.append(corect_in_list)
@@ -24,14 +24,18 @@ def skoba(old_list: list, new_list: list):
             new_list.append(el)
     return
 
-# Признак fuck = 1 для остановки цикла
-__FUCK = 0
+
 __CORECTOR_LIST_SKOBKI = [0]
+r = []
+
+# Признак fuck = 1 для остановки цикла
+"""
+__FUCK = 0
 
 while __FUCK == 0:
     # Ввод примера
     primer = input("Чё там?\n")
-    if primer == "n":
+    if primer == "":
         __FUCK = 1
         break
 
@@ -41,5 +45,6 @@ while __FUCK == 0:
 
     new_primer = []
 
-    skoba(list_primer, new_primer)
+    fun_brackets_in_list(list_primer, new_primer)
     print(new_primer)
+"""
