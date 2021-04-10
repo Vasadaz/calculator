@@ -22,7 +22,6 @@ class ArifmeticOperation:
 
 # Признак fuck = 1 для остановки цикла
 __FUCK = 0
-#__CORECTOR_LIST_SKOBKI = [0]
 
 while __FUCK == 0:
     # Ввод примера
@@ -46,19 +45,15 @@ while __FUCK == 0:
     # Коректор индекса для звписи в элемент списка list_args_brackets
     __i_for_filter = 0
 
-
     # Скелеивание единых чисел в элемент списока list_args_brackets и
     # добавление арифмитического оператора в список list_operators_brackets
     for i in range(len(list_primer)):
         # Замена запятой на точку
         list_primer[i] = "." if list_primer[i] == "," else list_primer[i]
         print(list_primer[i:i + 2])
-        # Обработка отрицательных чисел
-        if (i == 0 and list_primer[i] == "-") or list_primer[i - 1 :i + 1] == ['(', '-']:
-            list_args_brackets.append(list_primer[i])
 
         # Фильтр для определения целых и точечных чисел
-        elif list_primer[i].isdigit() or list_primer[i] == ".":
+        if list_primer[i].isdigit() or list_primer[i] == ".":
             # Перенаправление ошибки, т.к. элемент с данным индексом может не существовать
             try:
                 # Добавление к существуещему элементу в списке list_args_brackets
@@ -66,6 +61,9 @@ while __FUCK == 0:
             except IndexError:
                 # Создание элемента в списке list_args_brackets
                 list_args_brackets.append(list_primer[i])
+        # Обработка отрицательных чисел
+        elif (i == 0 and list_primer[i] == "-") or list_primer[i - 1:i + 1] == ['(', '-']:
+            list_args_brackets.append(list_primer[i])
 
         # Помечаем скобки в оба новых списка
         elif list_primer[i] == "(" or list_primer[i] == ")":

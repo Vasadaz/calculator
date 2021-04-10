@@ -26,7 +26,6 @@ def fun_brackets_in_list(old_list: list, new_list: list):
 
 
 __CORECTOR_LIST_SKOBKI = [0]
-r = []
 
 # Признак fuck = 1 для остановки цикла
 """
