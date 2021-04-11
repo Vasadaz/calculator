@@ -1,7 +1,8 @@
 import scobki
+a = "-3+4+(-2+(2-1)*(-4))-1"
 
-list_primer = ['-', '3', '+', '4', '+', '(', '2', '+', '(', '-', '2', '-', '1', ')', '*', '(', '-', '400', ')', ')', '-', '1']
-
+list_primer = [el for el in a if el != " "]
+print(list_primer)
 # Список для формирования чисел из примера
 list_args_brackets = []
 
@@ -58,7 +59,8 @@ for i in range(len(list_primer)):
         list_operators_brackets.append(list_primer[i])
         # Смещение индекса для следующего числа в списке list_args_brackets
         __i_for_filter += 1
-    #print(__i_for_filter, list_args_brackets, list_operators_brackets)
+
+print(__i_for_filter, list_args_brackets, list_operators_brackets)
 
 list_args = []
 scobki.fun_brackets_in_list(list_args_brackets, list_args)
@@ -66,4 +68,4 @@ scobki.fun_brackets_in_list(list_args_brackets, list_args)
 list_operators = []
 scobki.fun_brackets_in_list(list_operators_brackets, list_operators)
 
-#print(list_args, list_operators)
+print(list_args, list_operators)

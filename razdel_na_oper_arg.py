@@ -2,8 +2,8 @@ import scobki
 
 # Пример после скобок
 list_primer = ['3', '+', '4', '+', ['2', '+', ['2', '-', '1'], '*', '4'], '-', '1']
-new_primer = []
-scobki.fun_brackets_in_list(list_primer, new_primer)
+__new_list = []
+scobki.fun_brackets_in_list(list_primer, __new_list)
 
 # Список для формирования чисел из примера
 list_args = []
@@ -71,7 +71,7 @@ def sortirovka(list_math_ex: list, i_list_math_ex: int, list_for_args: list, lis
     __i_for_filter = 0
     return None
 
-razdelitel(new_primer, list_args, list_operators)
+razdelitel(__new_list, list_args, list_operators)
 
 print(list_args)
 print(list_operators)
