@@ -18,7 +18,7 @@ __i_for_filter = 0
 for i in range(len(list_primer)):
     # Замена запятой на точку
     list_primer[i] = "." if list_primer[i] == "," else list_primer[i]
-    #print(list_primer[i:i + 2])
+    #print(x_list[i:i + 2])
     # Обработка отрицательных чисел
     if (i == 0 and list_primer[i] == "-") or list_primer[i - 1 :i + 1] == ['(', '-']:
         list_args_brackets.append(list_primer[i])
