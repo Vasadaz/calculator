@@ -38,6 +38,7 @@ def operations(list_operators: list, list_args: list):
 
             print(list_args)
             print(list_operators)
+            i -= 1
             print("_____FALSE 2 end 3_____")
             return False
         print("_____FALSE 1 end 3_____")
