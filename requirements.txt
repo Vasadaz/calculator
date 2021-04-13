@@ -1,4 +1,4 @@
-astroid==2.5.2
+astroid==2.5.3
 isort==5.8.0
 lazy-object-proxy==1.6.0
 mccabe==0.6.1
