@@ -1,6 +1,7 @@
 import scobki
 import operations
 
+
 # Признак fuck = 1 для остановки цикла
 __FUCK = 0
 
