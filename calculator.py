@@ -11,6 +11,10 @@ while __FUCK == 0:
     if primer == "":
         __FUCK = 1
         break
+
+    # Обработка ситуации 10+(-(2*3+4))+(-(2*3+4))+(-(2*3+4))+(-(2*3+4)) = 0
+    primer = primer.replace("(-(", "(-1*(" )
+    print("======================   ",primer)
     # Создание списка из строки primer с фильтром от пробелов
     list_primer = [el for el in primer if el != " "]
     print(list_primer)
