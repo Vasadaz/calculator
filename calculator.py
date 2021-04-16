@@ -105,153 +105,118 @@ def fun_brackets_in_list(math_list: list) -> list:
 
 
 def operations(list_operators: list, list_args: list):
-    def right_arg(r_arg):
-        nonlocal list_operators, list_args, j
+
+    def __right_arg(r_arg, index: int):
+        nonlocal list_operators, list_args
         if isinstance(r_arg, list):
-            list_args[j + 1] = operations(list_operators[j + 1], list_args[j + 1])
-            del list_operators[j + 1]
+            list_args[index + 1] = operations(list_operators[index + 1], list_args[index + 1])
+            del list_operators[index + 1]
             if len(list_operators) == 0:
                 return True
         return False
 
+    def __del_DEL():
+        nonlocal list_operators, list_args
+        list_args = [el for el in list_args if el != "DEL"]
+        list_operators = [el for el in list_operators if el != "DEL"]
+        return
 
-    if len(list_operators) == 0:
-        return list_args[0]
-
-    for i in range(len(list_operators)):
-
+    def __fex_err_IndexError(index: int):
         try:
-            list_operators[i] = list_operators[i]
-            list_args[i + 1] = list_args[i + 1]
+            list_operators[index] = list_operators[index]
+            list_args[index + 1] = list_args[index + 1]
+            return False
         except IndexError:
-            break
+            return True
 
-        for j in range(len(list_operators)):
 
-            try:
-                list_operators[j] = list_operators[j]
-                list_args[j + 1] = list_args[j + 1]
-            except IndexError:
-                break
+    if len(list_operators) == 0: return list_args[0]
 
-            if isinstance(list_operators[j], list):
-                if len(list_operators[j]) == 0:
-
-                    try:
-                        list_operators[j] = list_operators[j]
-                        list_args[j + 1] = list_args[j + 1]
-                    except IndexError:
-                        break
-                    if list_operators[j + 1] == "**":
-                        list_operators[j] = list_operators[j + 1]
-                        del list_operators[j + 1]
-                    else:
-                        list_operators[j] = list_operators[j + 1]
-                        del list_operators[j + 1]
-                        list_args[j] = (list_args[j][0])
+    for i_1 in range(len(list_operators)):
+        if __fex_err_IndexError(i_1): break
+        if isinstance(list_operators[i_1], list):
+            if len(list_operators[i_1]) == 0:
+                __fex_err_IndexError(i_1)
+                if list_operators[i_1 + 1] == "**":
+                    list_operators[i_1] = list_operators[i_1 + 1]
+                    del list_operators[i_1 + 1]
                 else:
-                    list_args[j] = operations(list_operators[j], list_args[j])
-                    del list_operators[j]
+                    list_operators[i_1] = list_operators[i_1 + 1]
+                    del list_operators[i_1 + 1]
+                    list_args[i_1] = (list_args[i_1][0])
+            else:
+                list_args[i_1] = operations(list_operators[i_1], list_args[i_1])
+                del list_operators[i_1]
 
-        # Обработка операторов ** ^
-        for j in range(len(list_operators)):
+    # Обработка операторов ** ^
+    for i_2 in range(len(list_operators)):
+        if __fex_err_IndexError(i_2): break
 
-            try:
-                list_operators[j] = list_operators[j]
-                list_args[j + 1] = list_args[j + 1]
-            except IndexError:
-                break
-
-            if list_operators[j] == "**" or list_operators[j] == "^":
-                if right_arg(list_args[j + 1]):
-                    return
-                # Присвоение класса для обработки операции
-                if isinstance(list_args[j], list):
-                    n = ArifmeticOperation()
-                    list_args[j] = list_args[j][0]
-                    # Перезапись резальтата обработки в список list_args_brackets[с этим индексом будет валняться следующая операция]
-                    list_args[j + 1] = n.operation(float(list_args[j]), list_operators[j], float(list_args[j + 1]))
-                    # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
-                    list_args[j] = "DEL"
-                    # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
-                elif j == 0 and float(list_args[j]) < 0:
-                    n = ArifmeticOperation()
-                    # Перезапись резальтата обработки в список list_args_brackets[с этим индексом будет валняться следующая операция]
-                    list_args[j + 1] = -(n.operation(float(list_args[j]), list_operators[j], float(list_args[j + 1])))
-                    # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
-                    list_args[j] = "DEL"
-                    # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
-                    list_operators[j] = "DEL"
-                else:
-                    n = ArifmeticOperation()
-                    # Перезапись резальтата обработки в список list_args_brackets[с этим индексом будет валняться следующая операция]
-                    list_args[j + 1] = n.operation(float(list_args[j]), list_operators[j], float(list_args[j + 1]))
-                    # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
-                    list_args[j] = "DEL"
-                    # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
-                    list_operators[j] = "DEL"
-
-        list_args = [el for el in list_args if el != "DEL"]
-        list_operators = [el for el in list_operators if el != "DEL"]
-
-        # Выполнение приоритетных арифмитических операций: * / // %
-        for j in range(len(list_operators)):
-
-            try:
-                list_operators[j] = list_operators[j]
-                list_args[j + 1] = list_args[j + 1]
-            except IndexError:
-                break
-
-            if list_operators[j] == "*" or list_operators[j] == "/" \
-                    or list_operators[j] == "//" or list_operators[j] == "%":
-
-                if right_arg(list_args[j + 1]):
-                    return
-
-                # Присвоение класса для обработки операции
+        if list_operators[i_2] == "**" or list_operators[i_2] == "^":
+            if __right_arg(list_args[i_2 + 1], i_2): return
+            # Присвоение класса для обработки операции
+            if isinstance(list_args[i_2], list):
                 n = ArifmeticOperation()
-                # Перезапись резальтата обработки в список
-                # pow_list_operator[с этим индексом будет валняться следующая операция]
-                list_args[j + 1] = n.operation(float(list_args[j]), list_operators[j], float(list_args[j + 1]))
+                list_args[i_2] = list_args[i_2][0]
+                # Перезапись резальтата обработки в список list_args_brackets[с этим индексом будет валняться следующая операция]
+                list_args[i_2 + 1] = n.operation(float(list_args[i_2]), list_operators[i_2], float(list_args[i_2 + 1]))
                 # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
-                list_args[j] = "DEL"
+                list_args[i_2] = "DEL"
                 # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
-                list_operators[j] = "DEL"
-
-        list_args = [el for el in list_args if el != "DEL"]
-        list_operators = [el for el in list_operators if el != "DEL"]
-
-        # Выполнение арифмитических операций: + -
-        for j in range(len(list_operators)):
-
-            try:
-                list_operators[j] = list_operators[j]
-                list_args[j + 1] = list_args[j + 1]
-            except IndexError:
-                break
-
-            if list_operators[j] == "+" or list_operators[j] == "-":
-                if right_arg(list_args[j + 1]):
-                    return
-
-                try:
-                    list_operators[i] = list_operators[i]
-                except IndexError:
-                    break
-                # Присвоение класса для обработки операции
+            elif i_2 == 0 and float(list_args[i_2]) < 0:
                 n = ArifmeticOperation()
-                # Перезапись резальтата обработки в список
-                # new_list_digit[с этим индексом будет валняться следующая операция]
-                list_args[j + 1] = n.operation(float(list_args[j]), list_operators[j], float(list_args[j + 1]))
+                # Перезапись резальтата обработки в список list_args_brackets[с этим индексом будет валняться следующая операция]
+                list_args[i_2 + 1] = -(n.operation(float(list_args[i_2]), list_operators[i_2], float(list_args[i_2 + 1])))
                 # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
-                list_args[j] = "DEL"
+                list_args[i_2] = "DEL"
                 # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
-                list_operators[j] = "DEL"
+                list_operators[i_2] = "DEL"
+            else:
+                n = ArifmeticOperation()
+                # Перезапись резальтата обработки в список list_args_brackets[с этим индексом будет валняться следующая операция]
+                list_args[i_2 + 1] = n.operation(float(list_args[i_2]), list_operators[i_2], float(list_args[i_2 + 1]))
+                # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
+                list_args[i_2] = "DEL"
+                # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
+                list_operators[i_2] = "DEL"
+    __del_DEL()
 
-    list_args = [el for el in list_args if el != "DEL"]
-    list_operators = [el for el in list_operators if el != "DEL"]
+    # Выполнение приоритетных арифмитических операций: * / // %
+    for i_3 in range(len(list_operators)):
+        if __fex_err_IndexError(i_3): break
 
+        if list_operators[i_3] == "*" or list_operators[i_3] == "/" \
+                or list_operators[i_3] == "//" or list_operators[i_3] == "%":
+
+            if __right_arg(list_args[i_3 + 1], i_3): return
+
+            # Присвоение класса для обработки операции
+            n = ArifmeticOperation()
+            # Перезапись резальтата обработки в список
+            # pow_list_operator[с этим индексом будет валняться следующая операция]
+            list_args[i_3 + 1] = n.operation(float(list_args[i_3]), list_operators[i_3], float(list_args[i_3 + 1]))
+            # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
+            list_args[i_3] = "DEL"
+            # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
+            list_operators[i_3] = "DEL"
+    __del_DEL()
+
+    # Выполнение арифмитических операций: + -
+    for i_4 in range(len(list_operators)):
+        if __fex_err_IndexError(i_4): break
+
+        if list_operators[i_4] == "+" or list_operators[i_4] == "-":
+            if __right_arg(list_args[i_4 + 1], i_4): return
+            # Присвоение класса для обработки операции
+            n = ArifmeticOperation()
+            # Перезапись резальтата обработки в список
+            # new_list_digit[с этим индексом будет валняться следующая операция]
+            list_args[i_4 + 1] = n.operation(float(list_args[i_4]), list_operators[i_4], float(list_args[i_4 + 1]))
+            # Удаление уже прооперируемого числа из списка list_args_brackets без смещения по индексу
+            list_args[i_4] = "DEL"
+            # Удаление уже прооперируемого перанта из списка list_for_operators без смещения по индексу
+            list_operators[i_4] = "DEL"
+    __del_DEL()
     return list_args[-1]
 
 
