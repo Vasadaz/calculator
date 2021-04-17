@@ -221,9 +221,6 @@ def operations(operators: list, args: list):
     return args[-1]
 
 def fun_calculator(math_example: str):
-
-
-
     # Операции по преобразованию math_example в список с правильными значениями:
     # 1) Преобразование math_example в список без пробелов x=[el_1 for el_1 in math_example if el_1 != " "]
     # 2) Склеивание списка х в строку x="".join(x)
