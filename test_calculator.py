@@ -47,7 +47,7 @@ class TestCalculator(unittest.TestCase):
         assert fun_calculator("3*(-4)/4**2") == 3 * (-4) / 4 ** 2  # -0.75
 
     def test_14(self):
-        assert fun_calculator("-3+4+(-2**(-2)+(5-7)*(-4))-1") == \
+        assert fun_calculator("-3+4+(-2^(-2)+(5-7)*(-4))-1") == \
                -3 + 4 + (-2 ** (-2) + (5 - 7) * (-4)) - 1  # 7.75
 
     def test_15(self):
@@ -63,7 +63,7 @@ class TestCalculator(unittest.TestCase):
                10 + (-(2 * 3 + 4)) + (-(2 * 3 + 4)) + (-(2 * 3 + 4)) + (-(2 * 3 + 4))  # -30
 
     def test_18(self):
-        assert fun_calculator("-3+4+(-(2**(2))+(5-7)*(-4))-1") == \
+        assert fun_calculator("-3+4+(-(2^(2))+(5-7)*(-4))-1") == \
                 -3 + 4 + (-(2 ** 2) + (5 - 7) * (-4)) - 1  # 4
 
     def test_19(self):
