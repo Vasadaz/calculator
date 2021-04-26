@@ -2,7 +2,7 @@
 My goal was to create a complete calculator that can:
 1. Accept a string converting it into mathematical operations
 2. Handle numbers with comma or point
-3. Perform mathematical operations + - / //% ** ^
+3. Perform mathematical operations + - / // % ** ^
 4. Processing mathematical examples with brackets.
 5. No third-party libraries were used
 ___
