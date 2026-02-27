@@ -1,3 +1,5 @@
+# **THE PROJECT IS CLOSED**
+
 #### My first experience of developing a Python program.
 My goal was to create a full-fledged calculator without using third-party libraries.
 The calculator must be able to:
@@ -13,6 +15,8 @@ The calculator must be able to:
 - Exponentiation ** ^
 4. Handle mathematical examples with parentheses.
 ___
+# **ПРОЕКТ ЗАКРЫТ**
+
 ###### The original comments are written in Russian.
 #### Мой первый опыт разработки программы на Python.
 Моей целью было создать полноценный калькулятор не используя сторонние библиотеки.
